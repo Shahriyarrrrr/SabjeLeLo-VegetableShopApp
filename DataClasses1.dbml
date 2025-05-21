@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Demo" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-5903S8A;Initial Catalog=Demo;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="SabJeeLelo.Properties.Settings" SettingsPropertyName="DemoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BillTbl" Member="BillTbls">
+    <Type Name="BillTbl">
+      <Column Name="BillingCode" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerPhone" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="SellerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BuyingDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(12,2) NOT NULL" CanBeNull="false" />
+      <Association Name="SellerTbl_BillTbl" Member="SellerTbl" ThisKey="SellerID" OtherKey="SellerCode" Type="SellerTbl" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductTbl" Member="ProductTbls">
+    <Type Name="ProductTbl">
+      <Column Name="ProductCode" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="ProductTypeCode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProductPrice" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Stock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TypeTbl_ProductTbl" Member="TypeTbl" ThisKey="ProductTypeCode" OtherKey="TypeCode" Type="TypeTbl" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SellerTbl" Member="SellerTbls">
+    <Type Name="SellerTbl">
+      <Column Name="SellerCode" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SellerPassword" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SellerPhone" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="SellerGender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="SellerName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="SellerTbl_BillTbl" Member="BillTbls" ThisKey="SellerCode" OtherKey="SellerID" Type="BillTbl" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TypeTbl" Member="TypeTbls">
+    <Type Name="TypeTbl">
+      <Column Name="TypeCode" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TypeName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="TypeTbl_ProductTbl" Member="ProductTbls" ThisKey="TypeCode" OtherKey="ProductTypeCode" Type="ProductTbl" />
+    </Type>
+  </Table>
+</Database>
